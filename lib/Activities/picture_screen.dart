@@ -16,8 +16,9 @@ class PickImage extends StatefulWidget {
 }
 
 class _PickImageState extends State<PickImage> {
-  Uint8List? image;
-  File? selectedImage;
+  List<Uint8List> images = []; // List to store selected images
+  List<File> selectedImages = []; // List to store selected image files
+  int maxImages = 3; // Maximum number of images allowed
 
   @override
   Widget build(BuildContext context) {
@@ -27,36 +28,65 @@ class _PickImageState extends State<PickImage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 2),
-                borderRadius: BorderRadius.circular(8),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(maxImages, (index) {
+                if (index < images.length) {
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.memory(images[index]),
+                  );
+                } else {
+                  return Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(Icons.add),
+                  );
+                }
+              }),
             ),
             SizedBox(height: 20),
-              Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  onTap: () { pickImage(ImageSource.gallery);},
+                  onTap: () {
+                    if (images.length < maxImages) {
+                      pickImage(ImageSource.gallery);
+                    }
+                  },
                   buttonText: 'Gallery',
                 ),
                 SizedBox(width: 10),
                 CustomButton(
-                  onTap: () { pickImage(ImageSource.camera);},
+                  onTap: () {
+                    if (images.length < maxImages) {
+                      pickImage(ImageSource.camera);
+                    }
+                  },
                   buttonText: 'Camera',
                 ),
               ],
             ),
-           Padding(
-             padding: const EdgeInsets.all(8.0),
-             child: CustomButton(
-                onTap: () {    AccessNavigator.accessTo(this.context,Dashboard());},
-                buttonText: 'Next',
-             ),
-           )
+            if (images.length == maxImages) // Conditionally show the "Next" button
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomButton(
+                  onTap: () {
+                    AccessNavigator.accessTo(this.context, Dashboard());
+                  },
+                  buttonText: 'Next',
+                ),
+              )
           ],
         ),
       ),
@@ -67,9 +97,13 @@ class _PickImageState extends State<PickImage> {
     final returnImage = await ImagePicker().pickImage(source: source);
     if (returnImage == null) return;
     setState(() {
-      selectedImage = File(returnImage.path);
-      image = File(returnImage.path).readAsBytesSync();
+      selectedImages.add(File(returnImage.path));
+      images.add(File(returnImage.path).readAsBytesSync());
     });
+
+    // Check if the maximum number of images is reached and show the "Next" button
+    if (images.length == maxImages) {
+      setState(() {});
+    }
   }
 }
-
