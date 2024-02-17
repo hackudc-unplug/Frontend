@@ -41,6 +41,7 @@ dependencies:
   path: ^1.8.3
   image_picker: ^0.8.6
   fl_chart: ^0.66.2
+  syncfusion_flutter_charts: ^19.1.54
 
 dev_dependencies:
   flutter_test:

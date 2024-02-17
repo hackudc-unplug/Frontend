@@ -3,6 +3,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_demo/Widgets/BarGraph/bar_graph.dart';
+import 'package:project_demo/Widgets/PieChart/pie_chart_page.dart';
+
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -27,14 +29,26 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       backgroundColor: Colors.deepPurple[100],
       body:Center(
-        child: SizedBox(
-            height: 200,//height de la box del graph
-            width: 400,
-            child: MyBarGraph(
-              dailySummary: dailySummary,
-            )),
+        child: Column(
+          children: [
+            SizedBox(
+                height: 200,//height de la box del graph
+                width: 400,
+                child: MyBarGraph(
+                  dailySummary: dailySummary,
+                )),
+            SizedBox(
+              height: 200,
+              width: 400,
+              child: MyPieChart(),
+            )
+          ],
+        ),
       )
 
     );
   }
+
+
 }
+
