@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
@@ -5,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_demo/Activities/DashboardPage.dart';
+import 'package:project_demo/Utils/AccessNavigator.dart';
+import 'package:project_demo/WebServices/WebServices.dart';
 import 'package:project_demo/Widgets/Button/CustomButton.dart';
 
 class InitialCameraPage extends StatefulWidget {
@@ -16,6 +19,9 @@ class InitialCameraPage extends StatefulWidget {
 }
 
 class _InitialCameraPageState extends State<InitialCameraPage> {
+  String bill_id = "";
+  List<String> idsRecive = [];
+  bool canUpload = false;
   List<Uint8List> images = []; // List to store selected images
   List<File> selectedImages = []; // List to store selected image files
   int maxImages = 3; // Maximum number of images allowed
@@ -74,12 +80,12 @@ class _InitialCameraPageState extends State<InitialCameraPage> {
               ),
             ],
           ),
-          if (images.length == maxImages) // Conditionally show the "Next" button
+          if (canUpload) // Conditionally show the "Next" button
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  widget.changePage(1);
+                  AccessNavigator.accessTo(context, DashboardPage(bill_id: this.bill_id));
                 },
                 child: Text("Upload"),
               ),
@@ -90,7 +96,7 @@ class _InitialCameraPageState extends State<InitialCameraPage> {
   }
   // Modify the pickImage function to send the image to an API
   pickImage(ImageSource source) async {
-    final returnImage = await ImagePicker().pickImage(source: source, imageQuality: 0);
+    final returnImage = await ImagePicker().pickImage(source: source);
     if (returnImage == null) return;
 
     // Convert image to bytes
@@ -125,12 +131,16 @@ class _InitialCameraPageState extends State<InitialCameraPage> {
     var response = await request.send();
 
     // Check the status code of the response
-    if (response.statusCode == 200) {
+    if (response.statusCode < 400) {
       // If successful, print the response
-      print(await response.stream.bytesToString());
-      //var responseBody = await response.stream.bytesToString();
-      //var jsonResponse = json.decode(responseBody);
-
+      var responseBody = await response.stream.bytesToString();
+      var jsonResponse = json.decode(responseBody);
+      print("test"+jsonResponse.toString());
+      idsRecive.add(jsonResponse.toString());
+      if(idsRecive.length >= 3){
+         bill_id = await WebService().sendIdS(idsRecive[0], idsRecive[1], idsRecive[2]);
+         canUpload = true;
+      }
     } else {
       // If not successful, print the error
       print('Failed to send image. Status code: ${response.statusCode}');

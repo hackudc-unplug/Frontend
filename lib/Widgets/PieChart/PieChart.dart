@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MyPieChart extends StatefulWidget {
-  const MyPieChart({super.key});
+  final  List<ChartData> info;
+  const MyPieChart({super.key, required this.info});
 
   @override
   State<MyPieChart> createState() => _MyPieChartState();
@@ -11,12 +12,7 @@ class MyPieChart extends StatefulWidget {
 class _MyPieChartState extends State<MyPieChart> {
   @override
   Widget build(BuildContext context) {
-    final List<ChartData> chartData = [
-      ChartData('David', 25),
-      ChartData('Steve', 38),
-      ChartData('Jack', 34),
-      ChartData('Others', 52)
-    ];
+    final List<ChartData> chartData = widget.info;
     return Scaffold(
         body: Center(
             child: Container(

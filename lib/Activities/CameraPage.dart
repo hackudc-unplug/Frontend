@@ -32,7 +32,7 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   void didChangeDependencies() {
-   pages = [ InitialCameraPage(changePage: (int page) { changePage(page); },),DashboardPage()];
+   pages = [ InitialCameraPage(changePage: (int page) { changePage(page); },),DashboardPage(bill_id: '',)];
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
   }
