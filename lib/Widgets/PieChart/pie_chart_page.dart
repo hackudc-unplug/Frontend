@@ -20,18 +20,19 @@ class _MyPieChartState extends State<MyPieChart> {
     return Scaffold(
         body: Center(
             child: Container(
-                child: SfCircularChart(
-                    backgroundColor: Colors.deepPurple[100],
-                    series: <CircularSeries>[
-                      // Render pie chart
-                      PieSeries<ChartData, String>(
-                          dataSource: chartData,
-                          pointColorMapper:(ChartData data,  _) => data.color,
-                          xValueMapper: (ChartData data, _) => data.x,
-                          yValueMapper: (ChartData data, _) => data.y
+                child: SizedBox(
+                  child: SfCircularChart(
+                      series: <CircularSeries>[
+                        // Render pie chart
+                        PieSeries<ChartData, String>(
+                            dataSource: chartData,
+                            pointColorMapper:(ChartData data,  _) => data.color,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y
 
-                      )
-                    ]
+                        )
+                      ]
+                  ),
                 )
             )
         )

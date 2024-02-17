@@ -3,19 +3,19 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project_demo/Activities/dashboard.dart';
-import 'package:project_demo/Widgets/custom_button.dart';
+import 'package:project_demo/Activities/DashboardPage.dart';
+import 'package:project_demo/Widgets/Button/CustomButton.dart';
 
-import '../Utils/navigate.dart';
+import '../Utils/AccessNavigator.dart';
 
-class PickImage extends StatefulWidget {
-  const PickImage({Key? key}) : super(key: key);
+class CameraPage extends StatefulWidget {
+  const CameraPage({Key? key}) : super(key: key);
 
   @override
-  State<PickImage> createState() => _PickImageState();
+  State<CameraPage> createState() => _CameraPageState();
 }
 
-class _PickImageState extends State<PickImage> {
+class _CameraPageState extends State<CameraPage> {
   List<Uint8List> images = []; // List to store selected images
   List<File> selectedImages = []; // List to store selected image files
   int maxImages = 3; // Maximum number of images allowed
@@ -23,7 +23,6 @@ class _PickImageState extends State<PickImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +81,7 @@ class _PickImageState extends State<PickImage> {
                 padding: const EdgeInsets.all(8.0),
                 child: CustomButton(
                   onTap: () {
-                    AccessNavigator.accessTo(this.context, Dashboard());
+                    AccessNavigator.accessTo(this.context, DashboardPage());
                   },
                   buttonText: 'Next',
                 ),

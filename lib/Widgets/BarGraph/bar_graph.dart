@@ -39,10 +39,12 @@ class _MyBarGraphState extends State<MyBarGraph> {
         BarChartData(
           maxY: (getMax(widget.dailySummary)).ceilToDouble(),
           minY: 0,
-          gridData: FlGridData(show: false),
+          gridData: FlGridData(show: true),
           titlesData: FlTitlesData(
             topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+
             bottomTitles: AxisTitles(sideTitles: SideTitles(
                 showTitles: true,
                 getTitlesWidget: getBottomTitles,
@@ -56,11 +58,7 @@ class _MyBarGraphState extends State<MyBarGraph> {
                   color: Colors.grey[800],
                   width: 25,
                 borderRadius: BorderRadius.circular(4),
-                backDrawRodData: BackgroundBarChartRodData(
-                  show: true,
-                  toY: (getMax(widget.dailySummary)).ceilToDouble(),
-                  color: Colors.grey[200],
-                ),
+
 
               )]
             ))
