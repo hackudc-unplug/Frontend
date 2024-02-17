@@ -37,9 +37,9 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.only(
                 top: 8.0, bottom: 8.0, right: 16, left: 16),
-            child: CustomButton(
-                buttonText: "Submit",
-                onTap: () {
+            child: ElevatedButton(
+                child: Text("Submit"),
+                onPressed: () {
                   AccessNavigator.accessTo(context, MainPage());
                 }),
           )

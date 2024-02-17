@@ -55,7 +55,7 @@ class _MyBarGraphState extends State<MyBarGraph> {
               x: data.x,
               barRods: [BarChartRodData(
                   toY: data.y,
-                  color: Colors.grey[800],
+                  color: Colors.blue[200],
                   width: 25,
                 borderRadius: BorderRadius.circular(4),
 

@@ -22,6 +22,7 @@ class _MyPieChartState extends State<MyPieChart> {
             child: Container(
                 child: SizedBox(
                   child: SfCircularChart(
+                      legend:Legend(isVisible: true) ,
                       series: <CircularSeries>[
                         // Render pie chart
                         PieSeries<ChartData, String>(

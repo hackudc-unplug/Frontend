@@ -13,7 +13,7 @@ class WebService {
   Future<ConsumationDayBean> getConsumationsByDay(
       int day, int month, int year) async {
     String url =
-        "http://34.73.242.220:8000/price-consumption/day?bill_id=1&day=1&month=1&year=2023";
+        "http://34.16.19.72:8000/price-consumption/day?bill_id=1&day=1&month=1&year=2023";
     http.Response response = await NetworkUtility().get(url, false);
     ResponseDecoder responseDecoded =
         ResponseDecoder().decodeResponse(response);
@@ -24,7 +24,7 @@ class WebService {
   Future<ConsumationDayBean> getConsumationsWeek(
       int day, int month, int year) async {
     String url =
-        "http://34.73.242.220:8000/price-consumption/week?bill_id=1&day=1&month=1&year=2023";
+        "http://34.16.19.72:8000/price-consumption/week?bill_id=1&day=1&month=1&year=2023";
     http.Response response = await NetworkUtility().get(url, false);
     ResponseDecoder responseDecoded =
         ResponseDecoder().decodeResponse(response);
@@ -35,7 +35,7 @@ class WebService {
   Future<ConsumationDayBean> getConsumationsByMonth(
       int day, int month, int year) async {
     String url =
-        "http://34.73.242.220:8000/price-consumption/month?bill_id=1&day=1&month=1&year=2023";
+        "http://34.16.19.72:8000/price-consumption/month?bill_id=1&day=1&month=1&year=2023";
     http.Response response = await NetworkUtility().get(url, false);
     ResponseDecoder responseDecoded =
         ResponseDecoder().decodeResponse(response);

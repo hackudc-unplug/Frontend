@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_demo/Activities/CameraPage.dart';
-import 'package:project_demo/Activities/DashboardPage.dart';
+
 import '../Widgets/NavBar/CustomTabBar.dart';
 import 'BlankPage.dart';
 import 'ChartPage.dart';
@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  List<Widget> pages = <Widget>[ChartPage(), CameraPage(),DashboardPage()];
+  List<Widget> pages = <Widget>[ChartPage(), CameraPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
